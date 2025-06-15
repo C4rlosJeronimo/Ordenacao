@@ -1,42 +1,55 @@
-1. Algoritmos Avaliados
+# Análise de Algoritmos de Ordenação
+
+## 1. Algoritmos Avaliados
+
 Os algoritmos de ordenação foram divididos em três grupos para facilitar a comparação:
 
-Grupo A:
-Insert Sort
-Selection Sort
-Comb Sort
-Grupo B:
-Merge Sort
-Quick Sort
-Shell Sort
-Grupo C:
-Radix Sort
-Timsort
-Stooge Sort
-2. Métricas de Avaliação
-Para cada execução de um algoritmo, as seguintes métricas são coletadas:
+- **Grupo A:**
+  - Insert Sort
+  - Selection Sort
+  - Comb Sort
 
-Tempo de Execução: O tempo total (em nanossegundos) que o algoritmo levou para ordenar o vetor.
-Número de Trocas: A quantidade de vezes que dois elementos foram trocados de posição no vetor. Para algoritmos que não realizam trocas diretas (como Merge Sort ou Insert Sort via deslocamento), este contador reflete o número de movimentos ou "trocas conceituais".
-Número de Iterações: A contagem de passos ou operações fundamentais realizadas pelo algoritmo (ex: comparações, acessos a elementos em loops principais).
-3. Metodologia de Teste
-A avaliação é realizada seguindo a seguinte metodologia:
+- **Grupo B:**
+  - Merge Sort
+  - Quick Sort
+  - Shell Sort
 
-Tamanhos de Vetor: Os algoritmos são testados com vetores de inteiros de 1.000, 10.000, 100.000, 500.000 e 1.000.000 elementos.
-Dados Aleatórios: Os vetores são preenchidos aleatoriamente.
-Múltiplas Rodadas: Para cada combinação de algoritmo e tamanho de vetor, 5 rodadas de execução são realizadas, utilizando diferentes seeds para o gerador de números aleatórios. Isso garante que os resultados representem uma média confiável e minimizam o impacto de variações pontuais.
-Replicabilidade: O uso de seeds permite replicar os conjuntos de dados exatos para cada rodada, garantindo a consistência dos testes.
-Otimização de Performance: Para evitar tempos de execução excessivamente longos, o Stooge Sort é intencionalmente pulado para vetores com 100.000 elementos ou mais, devido à sua complexidade de tempo de O(N 
-2.7
- ).
-4. Estrutura do Projeto
-Com a estrutura simplificada, seu projeto estará organizado da seguinte forma:
+- **Grupo C:**
+  - Radix Sort
+  - Timsort
+  - Stooge Sort
 
+---
+
+## 2. Métricas de Avaliação
+
+Para cada execução de um algoritmo, foram coletadas as seguintes métricas:
+
+- **Tempo de Execução:** Tempo total (em nanossegundos) necessário para ordenar o vetor.
+- **Número de Trocas:** Quantidade de vezes que dois elementos foram trocados de posição. Para algoritmos baseados em deslocamento (como Merge Sort), esse contador representa o número de movimentos.
+- **Número de Iterações:** Quantidade de operações fundamentais realizadas pelo algoritmo, como comparações e acessos em loops principais.
+
+---
+
+## 3. Metodologia de Teste
+
+A avaliação foi conduzida conforme os seguintes critérios:
+
+- **Tamanhos dos Vetores:** 1.000, 10.000, 100.000, 500.000 e 1.000.000 elementos.
+- **Dados Aleatórios:** Vetores gerados aleatoriamente.
+- **Rodadas:** 5 rodadas por combinação de algoritmo e tamanho, utilizando seeds diferentes para garantir replicabilidade e reduzir ruído estatístico.
+- **Limite para Stooge Sort:** Para vetores com 100.000 elementos ou mais, o Stooge Sort é automaticamente ignorado devido ao seu custo computacional extremamente alto (complexidade de tempo O(n².7)).
+
+---
+
+## 4. Estrutura do Projeto
+
+```
 .
-├── src/                      # Pasta raiz do seu código-fonte
-│   ├── avaliador/            # Pacote principal para a classe de avaliação
+├── src/                         # Pasta raiz do código-fonte
+│   ├── avaliador/               # Pacote com a classe de avaliação
 │   │   └── AvaliadorOrdenacao.java
-│   └── ordenacao/            # Pacote para as classes relacionadas a ordenação
+│   └── ordenacao/               # Pacote com os algoritmos de ordenação
 │       ├── AlgoritmoOrdenacao.java
 │       ├── ResultadoExecucao.java
 │       ├── CombSort.java
@@ -48,25 +61,57 @@ Com a estrutura simplificada, seu projeto estará organizado da seguinte forma:
 │       ├── ShellSort.java
 │       ├── StoogeSort.java
 │       └── Timsort.java
-Classes Principais:
-AvaliadorOrdenacao.java: A classe principal que gerencia o ciclo de testes, gera os dados, executa os algoritmos, coleta as métricas, imprime as médias no console e exporta os resultados brutos.
-AlgoritmoOrdenacao.java: Uma classe abstrata que serve como base para todos os algoritmos de ordenação. Ela define a interface comum (ordenar) e gerencia os contadores de trocas e iterações.
-ResultadoExecucao.java: Uma classe de modelo de dados que encapsula os resultados de uma única execução de um algoritmo. Também possui um método estático para exportar todos os resultados para um arquivo CSV.
-Classes de Algoritmos: Cada arquivo em ordenacao/ (e.g., InsertSort.java, MergeSort.java) contém a implementação específica de um algoritmo de ordenação, herdando de AlgoritmoOrdenacao e registrando suas métricas internas.
-5. Como Compilar e Executar
-Siga estes passos para compilar e executar o projeto com a estrutura simplificada:
+```
 
-Organize as Pastas: Crie a pasta src e, dentro dela, as pastas avaliador e ordenacao. Mova seus arquivos Java para a pasta correspondente ao seu pacote.
-Abra o Terminal/Prompt de Comando: Navegue até o diretório src na sua estrutura de pastas.
-Compile o Código: Use o compilador Java (javac) para compilar todas as classes:
-Bash
+### Principais Classes
 
-javac avaliador/*.java ordenacao/*.java
-Execute a Aplicação: Após a compilação bem-sucedida, execute a classe principal AvaliadorOrdenacao (lembre-se de usar o nome completo do pacote):
-Bash
+- **AvaliadorOrdenacao.java:** Classe principal que executa os testes, gera dados, executa os algoritmos, coleta as métricas e exporta os resultados para CSV.
+- **AlgoritmoOrdenacao.java:** Classe abstrata que define a estrutura base dos algoritmos, incluindo contadores de trocas e iterações.
+- **ResultadoExecucao.java:** Modelo que armazena os resultados de cada execução e gera o arquivo CSV.
+- **Classes dos Algoritmos:** Cada arquivo em `ordenacao/` implementa um algoritmo específico, herdando de `AlgoritmoOrdenacao`.
 
-java avaliador.AvaliadorOrdenacao
-6. Resultados e Análise
-Durante a execução, o programa exibirá o desempenho de cada algoritmo no console.
-Ao final da execução, um arquivo chamado resultados_execucao_brutos.csv será gerado no diretório de onde você executou o comando java (neste caso, na pasta src).
-Este arquivo CSV contém todos os dados brutos de cada rodada e pode ser importado para ferramentas como Microsoft Excel, Google Sheets, Python (com Pandas, Matplotlib, Seaborn), ou R para uma análise mais detalhada e a criação de gráficos comparativos.
+---
+
+## 5. Como Compilar e Executar
+
+### Passo a Passo
+
+1. **Organize as Pastas:**
+   - Estrutura: `src/avaliador/` e `src/ordenacao/`.
+   - Coloque os arquivos Java nas pastas correspondentes.
+
+2. **Abra o Terminal:**
+   - Navegue até a pasta `src`.
+
+3. **Compile:**
+   ```
+   javac avaliador/*.java ordenacao/*.java
+   ```
+
+4. **Execute:**
+   ```
+   java avaliador.AvaliadorOrdenacao
+   ```
+
+---
+
+## 6. Resultados e Análise
+
+- Durante a execução, o desempenho de cada algoritmo será exibido no console.
+- Ao final, será gerado um arquivo chamado:
+
+```
+resultados_execucao_brutos.csv
+```
+
+- Este arquivo estará na pasta onde o comando `java` foi executado (geralmente dentro de `src/`).
+
+### Análise dos Dados
+
+- O CSV contém os dados brutos de todas as rodadas e tamanhos.
+- Você pode importar esse arquivo para ferramentas como:
+  - Excel
+  - Google Sheets
+  - Python (com bibliotecas como Pandas, Matplotlib e Seaborn)
+  - R
+- A partir dos dados, é possível gerar gráficos comparativos e realizar análises de desempenho detalhadas.

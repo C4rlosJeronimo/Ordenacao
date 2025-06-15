@@ -72,30 +72,7 @@ A avaliação foi conduzida conforme os seguintes critérios:
 
 ---
 
-## 5. Como Compilar e Executar
-
-### Passo a Passo
-
-1. **Organize as Pastas:**
-   - Estrutura: `src/avaliador/` e `src/ordenacao/`.
-   - Coloque os arquivos Java nas pastas correspondentes.
-
-2. **Abra o Terminal:**
-   - Navegue até a pasta `src`.
-
-3. **Compile:**
-   ```
-   javac avaliador/*.java ordenacao/*.java
-   ```
-
-4. **Execute:**
-   ```
-   java avaliador.AvaliadorOrdenacao
-   ```
-
----
-
-## 6. Resultados e Análise
+## 5. Resultados e Análise
 
 - Durante a execução, o desempenho de cada algoritmo será exibido no console.
 - Ao final, será gerado um arquivo chamado:
